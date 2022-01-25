@@ -17,7 +17,7 @@ const schema = {
 const mdel = mong.model("User", schema);
 
 app.get("/", (req, res) => {
-    res.send("Hello");
+    res.sendFile(__dirname + "/index.html");
   });
 
   
