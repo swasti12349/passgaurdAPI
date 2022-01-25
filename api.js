@@ -6,7 +6,7 @@ const app = exp();
 
 app.use(body.urlencoded({ extended: true }));
 
-mong.connect("mongodb://localhost:27017/apidb");
+mong.connect("mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb" || "mongodb://localhost:27017/apidb", {useNewUrlParser:true});
 
 const schema = {
   name: String,
