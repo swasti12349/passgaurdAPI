@@ -16,6 +16,11 @@ const schema = {
 
 const mdel = mong.model("User", schema);
 
+app.get("/", (req, res) => {
+    res.send("Hello");
+  });
+
+  
 app.get("/users", (req, res) => {
   mdel.find((err, found) => {
     if (err) {
@@ -43,10 +48,6 @@ app.post("/users",  (req, res)=>{
 
 
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
-});
-
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server started");
 });
