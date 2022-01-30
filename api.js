@@ -7,7 +7,7 @@ const app = exp();
 app.use(body.urlencoded({ extended: true }));
 
 // mong.connect("mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb", {useNewUrlParser:true});
-
+// mongo
 const users = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb');
 const data = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/dataDB');
 
@@ -71,7 +71,7 @@ app.post("/data",  (req, res)=>{
   const title = req.body.title;
   const password = req.body.password;
 
-  const m = new mdel({
+  const m = new datamdel({
       title: title,
       password: password
   })
