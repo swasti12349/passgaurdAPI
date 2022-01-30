@@ -71,8 +71,9 @@ app.post("/data", (req, res) => {
   const title = req.body.title;
   const password = req.body.password;
   const email = req.body.email;
+  const coll = "A" + email;
   const datamdel;
-  datamdel = users.model("Poll", dataschema);
+  datamdel = users.model(coll, dataschema);
   const m = new datamdel({
     title: title,
     password: password,
