@@ -13,7 +13,7 @@ const users = mong.createConnection(
 );
 // const data = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/dataDB');
 
-const datamdel = null;
+
 
 const schema = {
   name: String,
@@ -71,15 +71,16 @@ app.post("/data", (req, res) => {
   const title = req.body.title;
   const password = req.body.password;
   const email = req.body.email;
-
+  const datamdel;
   datamdel = users.model("Poll", dataschema);
   const m = new datamdel({
     title: title,
     password: password,
   });
+  res.send("Data is saved successfully");
   m.save();
   console.log(m);
-  res.send("Data is saved successfully");
+  
 });
 
 
