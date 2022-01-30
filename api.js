@@ -11,7 +11,7 @@ app.use(body.urlencoded({ extended: true }));
 const users = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb');
 // const data = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/dataDB');
 
-const datamdel;
+const datamdel= null;
 
 
 const schema = {
