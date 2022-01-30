@@ -10,7 +10,7 @@ app.use(body.urlencoded({ extended: true }));
 // mongo
 const users = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb');
 const data = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/dataDB');
-
+const mongodburl;
 const schema = {
   name: String,
   email: String,
@@ -23,7 +23,7 @@ const dataschema = {
 };
 
 const mdel = users.model("User", schema);
-const datamdel = data.model("Data", dataschema);
+
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
@@ -62,9 +62,12 @@ app.post("/users",  (req, res)=>{
         password: password
     })
     m.save();
+    mongodburl = "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/" + email;
+    const users = mong.createConnection(mongodburl);
+
     res.send("Registered");
 })
-
+const datamdel = data.model(mongodburl, dataschema);
 
 app.post("/data",  (req, res)=>{
     
