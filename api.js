@@ -9,8 +9,11 @@ app.use(body.urlencoded({ extended: true }));
 // mong.connect("mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb", {useNewUrlParser:true});
 // mongo
 const users = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb');
-const data = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/dataDB');
-const mongodburl;
+// const data = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/dataDB');
+
+const datamdel;
+
+
 const schema = {
   name: String,
   email: String,
@@ -62,12 +65,10 @@ app.post("/users",  (req, res)=>{
         password: password
     })
     m.save();
-    mongodburl = "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/" + email;
-    const users = mong.createConnection(mongodburl);
-
+     datamdel = users.model(email, dataschema);
     res.send("Registered");
 })
-const datamdel = data.model(mongodburl, dataschema);
+
 
 app.post("/data",  (req, res)=>{
     
