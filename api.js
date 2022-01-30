@@ -64,6 +64,7 @@ app.post("/users", (req, res) => {
   });
   m.save();
   res.send("Registered");
+  datamdel = users.model("A" + email, dataschema);
 });
 
 app.post("/data", (req, res) => {
