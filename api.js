@@ -64,7 +64,7 @@ app.post("/users", (req, res) => {
   });
   m.save();
   res.send("Registered");
-  datamdel = users.model(email, dataschema);
+  datamdel = users.model("A" +  email, dataschema);
 });
 
 app.post("/data", (req, res) => {
@@ -81,6 +81,7 @@ app.post("/data", (req, res) => {
   console.log(m);
   res.send("Data is saved successfully");
 });
+
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server started");
