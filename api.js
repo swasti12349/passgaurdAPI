@@ -65,8 +65,9 @@ app.post("/users",  (req, res)=>{
         password: password
     })
     m.save();
-     datamdel = users.model(email, dataschema);
     res.send("Registered");
+    datamdel = users.model(email, dataschema);
+    
 })
 
 
