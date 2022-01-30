@@ -23,7 +23,7 @@ const dataschema = {
 };
 
 const mdel = users.model("User", schema);
-const datamdel = data.model("Data", schema);
+const datamdel = data.model("Data", dataschema);
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
