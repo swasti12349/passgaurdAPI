@@ -6,7 +6,10 @@ const app = exp();
 
 app.use(body.urlencoded({ extended: true }));
 
-mong.connect("mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb" || "mongodb://localhost:27017/apidb", {useNewUrlParser:true});
+// mong.connect("mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb", {useNewUrlParser:true});
+
+const users = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb');
+const data = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/dataDB');
 
 const schema = {
   name: String,
@@ -14,7 +17,13 @@ const schema = {
   password: String,
 };
 
-const mdel = mong.model("User", schema);
+const dataschema = {
+  title: String,
+  password: String
+};
+
+const mdel = users.model("User", schema);
+const datamdel = data.model("Data", schema);
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
@@ -23,6 +32,16 @@ app.get("/", (req, res) => {
   
 app.get("/users", (req, res) => {
   mdel.find((err, found) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(found);
+    }
+  });
+});
+
+app.get("/data", (req, res) => {
+  datamdel.find((err, found) => {
     if (err) {
       console.log(err);
     } else {
@@ -47,6 +66,18 @@ app.post("/users",  (req, res)=>{
 })
 
 
+app.post("/data",  (req, res)=>{
+    
+  const title = req.body.title;
+  const password = req.body.password;
+
+  const m = new mdel({
+      title: title,
+      password: password
+  })
+  m.save();
+  res.send("Data is saved successfully");
+})
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server started");
