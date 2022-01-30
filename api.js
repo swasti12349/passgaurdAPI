@@ -76,6 +76,7 @@ app.post("/data",  (req, res)=>{
       password: password
   })
   m.save();
+  console.log(m);
   res.send("Data is saved successfully");
 })
 
