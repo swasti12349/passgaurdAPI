@@ -64,7 +64,7 @@ app.post("/users", (req, res) => {
   });
   m.save();
   res.send("Registered");
-  datamdel = users.model("A" + email, dataschema);
+  // datamdel = users.model("A" + email, dataschema);
 });
 
 app.post("/data", (req, res) => {
@@ -72,7 +72,7 @@ app.post("/data", (req, res) => {
   const password = req.body.password;
   const email = req.body.email;
   const coll = "A" + email;
-  const datamdel = users.model(coll, dataschema);
+  const datamdel = users.model("Coll", dataschema);
   
   const m = new datamdel({
     title: title,
