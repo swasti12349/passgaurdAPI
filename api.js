@@ -8,11 +8,12 @@ app.use(body.urlencoded({ extended: true }));
 
 // mong.connect("mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb", {useNewUrlParser:true});
 // mongo
-const users = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb');
+const users = mong.createConnection(
+  "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb"
+);
 // const data = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/dataDB');
 
-const datamdel= null;
-
+const datamdel = null;
 
 const schema = {
   name: String,
@@ -22,17 +23,15 @@ const schema = {
 
 const dataschema = {
   title: String,
-  password: String
+  password: String,
 };
 
 const mdel = users.model("User", schema);
 
-
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
-  });
+  res.sendFile(__dirname + "/index.html");
+});
 
-  
 app.get("/users", (req, res) => {
   mdel.find((err, found) => {
     if (err) {
@@ -53,37 +52,35 @@ app.get("/data", (req, res) => {
   });
 });
 
-app.post("/users",  (req, res)=>{
-    
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
-
-    const m = new mdel({
-        name: name,
-        email: email,
-        password: password
-    })
-    m.save();
-    res.send("Registered");
-    datamdel = users.model(email, dataschema);
-    
-})
-
-
-app.post("/data",  (req, res)=>{
-    
-  const title = req.body.title;
+app.post("/users", (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
   const password = req.body.password;
 
+  const m = new mdel({
+    name: name,
+    email: email,
+    password: password,
+  });
+  m.save();
+  res.send("Registered");
+  datamdel = users.model(email, dataschema);
+});
+
+app.post("/data", (req, res) => {
+  const title = req.body.title;
+  const password = req.body.password;
+  const email = req.body.email;
+
+  datamdel = users.model(email, dataschema);
   const m = new datamdel({
-      title: title,
-      password: password
-  })
+    title: title,
+    password: password,
+  });
   m.save();
   console.log(m);
   res.send("Data is saved successfully");
-})
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server started");
