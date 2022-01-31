@@ -29,6 +29,7 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
+// get all users
 app.get("/users", (req, res) => {
   mdel.find((err, found) => {
     if (err) {
@@ -39,6 +40,7 @@ app.get("/users", (req, res) => {
   });
 });
 
+// get data of a user
 app.get("/users", (req, res) => {
   const email = req.body.email;
   const emailstr = "A" + email + "s";
@@ -52,16 +54,9 @@ app.get("/users", (req, res) => {
   });
 });
 
-app.get("/data", (req, res) => {
-  datamdel.find((err, found) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(found);
-    }
-  });
-});
 
+
+// register a user
 app.post("/users", (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
@@ -77,6 +72,7 @@ app.post("/users", (req, res) => {
   // datamdel = users.model("A" + email, dataschema);
 });
 
+// upload a users data
 app.post("/data", (req, res) => {
   const title = req.body.title;
   const password = req.body.password;
