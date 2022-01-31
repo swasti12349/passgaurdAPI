@@ -48,6 +48,7 @@ app.get("/userdata", (req, res) => {
   mdels.find((err, found) => {
     if (err) {
       console.log(err);
+      res.send(err);
     } else {
       res.send(found);
     }
