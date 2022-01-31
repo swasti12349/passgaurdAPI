@@ -42,9 +42,9 @@ app.get("/users", (req, res) => {
 
 // get data of a user
 app.get("/userdata", (req, res) => {
-  const email = req.body.email;
-  const emailstr = "A" + email + "s";
-  const mdels = users.model(emailstr, dataschema);
+  // const email = req.body.email;
+  // const emailstr = "A" + email + "s";
+  const mdels = users.model("Aswastiranjan64@gmail.coms", dataschema);
   mdels.find((err, found) => {
     if (err) {
       console.log(err);
