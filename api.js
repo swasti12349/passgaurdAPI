@@ -41,7 +41,7 @@ app.get("/users", (req, res) => {
 });
 
 // get data of a user
-app.get("/usersdata", (req, res) => {
+app.get("/userdata", (req, res) => {
   const email = req.body.email;
   const emailstr = "A" + email + "s";
   const mdels = users.model(emailstr, dataschema);
@@ -52,7 +52,7 @@ app.get("/usersdata", (req, res) => {
       res.send(found);
     }
   });
-  
+
 });
 
 
