@@ -6,13 +6,10 @@ const app = exp();
 
 app.use(body.urlencoded({ extended: true }));
 
-// mong.connect("mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb", {useNewUrlParser:true});
-// mongo
+
 const users = mong.createConnection(
   "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb"
 );
-// const data = mong.createConnection('mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/dataDB');
-
 
 
 const schema = {
@@ -34,6 +31,19 @@ app.get("/", (req, res) => {
 
 app.get("/users", (req, res) => {
   mdel.find((err, found) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(found);
+    }
+  });
+});
+
+app.get("/users", (req, res) => {
+  const email = req.body.email;
+  const emailstr = "A" + email + "s";
+  const mdels = users.model(emailstr, dataschema);
+  mdels.find((err, found) => {
     if (err) {
       console.log(err);
     } else {
@@ -74,16 +84,17 @@ app.post("/data", (req, res) => {
   const coll = "A" + email + "s";
   const datamdel = users.model(coll, dataschema);
   
-  const m = new datamdel({
+  const m = new datamdel(
+    {
     title: title,
     password: password,
-  });
+    });
+
   res.send("Data is saved successfully");
   m.save();
   console.log(m);
   
 });
-
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server started");
