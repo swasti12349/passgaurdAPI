@@ -75,21 +75,20 @@ app.post("/users", (req, res) => {
 });
 
 // upload a users data
-app.post("/data", (req, res) => {
+app.post("/colls", (req, res) => {
   const title = req.body.title;
   const password = req.body.password;
   const email = req.body.email;
-  const coll = "A" + email + "s";
   const datamdel = users.model("Coll", dataschema);
   
-  const m = new datamdel(
+  const ms = new datamdel(
     {
     title: title,
     password: password,
     });
-
+    ms.save();
   res.send("Data is saved successfully");
-  m.save();
+
   console.log(m);
   
 });
