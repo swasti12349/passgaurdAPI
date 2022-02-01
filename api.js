@@ -6,6 +6,9 @@ const app = exp();
 
 app.use(body.urlencoded({ extended: true }));
 
+mong.connect("mongodb://localhost:27017/kop", {
+  useNewUrlParser: true,
+});
 
 const users = mong.createConnection(
   "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb"
@@ -75,21 +78,19 @@ app.post("/users", (req, res) => {
 });
 
 // upload a users data
-const datamdel
+
 app.post("/colls", (req, res) => {
   const title = req.body.title;
   const password = req.body.password;
   const email = req.body.email;
-  
-  users.collection(email).insertOne(dataschema)
-  
   const ms = new datamdel(
     {
     title: title,
     password: password,
     });
-    ms.save();
-  res.send("Data is saved successfully");
+  users.collection(email).insertOne(ms, ()=>{
+    res.send("Data is saved successfully");
+  })
 
   console.log(m);
   
