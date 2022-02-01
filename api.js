@@ -85,11 +85,11 @@ app.post("/colls", (req, res) => {
      title: req.body.title,
      password: req.body.password,
      email: req.body.email
-  }
-  
-  users.collection(email).insertOne(ms, ()=>{
+  };
+
+  users.collection(email).insertOne(ms, (err, result)=>{
     res.send("Data is saved successfully");
-  })
+  });
 
   console.log(m);
   
