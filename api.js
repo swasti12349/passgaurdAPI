@@ -80,14 +80,13 @@ app.post("/users", (req, res) => {
 // upload a users data
 
 app.post("/colls", (req, res) => {
-  const title = req.body.title;
-  const password = req.body.password;
-  const email = req.body.email;
-  const ms = new datamdel(
-    {
-    title: title,
-    password: password,
-    });
+  
+  var ms = {
+     title: req.body.title,
+     password: req.body.password,
+     email: req.body.email
+  }
+  
   users.collection(email).insertOne(ms, ()=>{
     res.send("Data is saved successfully");
   })
