@@ -75,11 +75,13 @@ app.post("/users", (req, res) => {
 });
 
 // upload a users data
+const datamdel
 app.post("/colls", (req, res) => {
   const title = req.body.title;
   const password = req.body.password;
   const email = req.body.email;
-  const datamdel = users.model("Coll", dataschema);
+  
+  users.collection(email).insertOne(dataschema)
   
   const ms = new datamdel(
     {
