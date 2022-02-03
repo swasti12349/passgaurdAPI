@@ -96,7 +96,7 @@ app.post("/users", (req, res) => {
   m.save();
   res.send("Registered");
   const e = "A" + email;
-  const f =  users.model(e, schema);
+  const f =  users.model(e, dataschema);
 });
 
 
