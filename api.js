@@ -31,17 +31,20 @@ const mdel = users.model("User", schema);
 // upload a users data
 app.post("/mad", (req, res) => {
   
-  var ms = {
-     title: req.body.title,
-     password: req.body.password,
-     email: req.body.email
-  };
+  const title = req.body.title;
+  const email = req.body.email;
+  const password = req.body.password;
+  const em = "A" + email;
+  const md = users.model(em, dataschema);
 
-  users.collection(email).insertOne(ms, (err, result)=>{
-    res.send("Data is saved successfully");
+  const m = new md({
+    title: title,
+    email: email,
+    password: password,
   });
 
-  console.log(m);
+  m.save();
+  res.send("Data is saved");
   
 });
 
@@ -92,7 +95,8 @@ app.post("/users", (req, res) => {
   });
   m.save();
   res.send("Registered");
-  
+  const e = "A" + email;
+  users.mdel(e, schema);
 });
 
 
