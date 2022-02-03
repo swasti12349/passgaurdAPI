@@ -39,7 +39,6 @@ app.post("/mad", (req, res) => {
 
   const m = new md({
     title: title,
-    email: email,
     password: password,
   });
 
