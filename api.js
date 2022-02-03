@@ -28,6 +28,24 @@ const dataschema = {
 
 const mdel = users.model("User", schema);
 
+// upload a users data
+app.post("/colls", (req, res) => {
+  
+  var ms = {
+     title: req.body.title,
+     password: req.body.password,
+     email: req.body.email
+  };
+
+  users.collection(email).insertOne(ms, (err, result)=>{
+    res.send("Data is saved successfully");
+  });
+
+  console.log(m);
+  
+});
+
+
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
@@ -77,23 +95,6 @@ app.post("/users", (req, res) => {
   
 });
 
-// upload a users data
-
-app.post("/colls", (req, res) => {
-  
-  var ms = {
-     title: req.body.title,
-     password: req.body.password,
-     email: req.body.email
-  };
-
-  users.collection(email).insertOne(ms, (err, result)=>{
-    res.send("Data is saved successfully");
-  });
-
-  console.log(m);
-  
-});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server started");
