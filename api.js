@@ -29,7 +29,7 @@ const dataschema = {
 const mdel = users.model("User", schema);
 
 // upload a users data
-app.post("/colls", (req, res) => {
+app.post("/mad", (req, res) => {
   
   var ms = {
      title: req.body.title,
