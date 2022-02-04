@@ -6,10 +6,6 @@ const app = exp();
 
 app.use(body.urlencoded({ extended: true }));
 
-mong.connect("mongodb://localhost:27017/kop", {
-  useNewUrlParser: true,
-});
-
 const users = mong.createConnection(
   "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb"
 );
@@ -34,6 +30,7 @@ app.post("/mad", (req, res) => {
   const title = req.body.title;
   const email = req.body.email;
   const password = req.body.password;
+
   const em = "A" + email;
   const md = users.model(em, dataschema);
 
@@ -41,12 +38,11 @@ app.post("/mad", (req, res) => {
     title: title,
     password: password,
   });
-
   m.save();
   res.send("Data is saved");
   
 });
-//
+
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
@@ -81,7 +77,7 @@ app.get("/userdata", (req, res) => {
 
 
 
-// register a user
+// register a user 
 app.post("/users", (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
