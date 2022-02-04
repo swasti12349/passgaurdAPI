@@ -69,6 +69,8 @@ app.get("/userdata", (req, res) => {
     var cursor = db.collection(email).find();
     cursor.forEach((doc, err)=>{
           resArr.push(doc);
+    }, ()=>{
+      res.send(resArr);
     });
   })
 });
