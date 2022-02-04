@@ -62,12 +62,13 @@ app.get("/users", (req, res) => {
 
 // get data of a user
 app.get("/userdata", (req, res) => {
-  
+  var resArr=[];
+
   email = req.body.email;
   mong.connect(url, (err, db)=>{
     var cursor = db.collection(email).find();
     cursor.forEach((doc, err)=>{
-      
+          resArr.push(doc);
     });
   })
 });
