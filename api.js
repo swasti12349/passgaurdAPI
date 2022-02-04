@@ -60,24 +60,35 @@ app.get("/users", (req, res) => {
   });
 });
 
-// get data of a user
-app.get("/userdata", (req, res) => {
-  var email = req.body.email;
-  var result = [];
-  mong.connect(url, (err, db)=>{
-   var cursor =  db.collection(email).find();
-   cursor.forEach((doc, err)=>{
-   result.push(doc);
+// // get data of a user
+// app.get("/userdata", (req, res) => {
+//   var email = req.body.email;
+//   var result = [];
+//   mong.connect(url, (err, db)=>{
+//    var cursor =  db.collection(email).find();
+//    cursor.forEach((doc, err)=>{
+//    result.push(doc);
 
-   }, ()=>{
-     db.close();
-    res.render('index', {items: result});
-   })
+//    }, ()=>{
+//      db.close();
+//     res.render('index', {items: result});
+//    })
    
-});
+// });
 
-});
+// });
 
+
+app.get("/userdata", (req, res)=>{
+
+  var email = req.body.email;
+
+  var mdel = users.model(email, dataschema);
+  mdel.find((err, found)=>{
+    res.send(found);
+  })
+
+})
 
 
 // register a user
