@@ -26,7 +26,6 @@ const dataschema = {
 const mdel = users.model("User", schema);
 
 // upload a users data
-
 app.post("/mad", (req, res) => {
   
   email = req.body.email;
@@ -64,16 +63,18 @@ app.get("/users", (req, res) => {
 // get data of a user
 app.get("/userdata", (req, res) => {
   const email = req.body.email;
-  const emailstr = "A" + email + "s";
-  const mdels = users.model(emailstr, dataschema);
-  mdels.find((err, found) => {
-    if (err) {
-      console.log(err);
-      res.send(err);
-    } else {
-      res.send(found);
-    }
-  });
+  
+  
+  mong.connect(url, (err, db)=>{
+    db.collection(email).find((err, result)=>{
+      
+      res.send(result);
+      db.close();
+    })
+
+
+
+});
 
 });
 
