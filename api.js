@@ -30,7 +30,6 @@ const mdel = users.model("User", schema);
 app.post("/mad", (req, res) => {
   
   email = req.body.email;
-  
   const m = {
     title: req.body.title,
     password: req.body.password
@@ -94,7 +93,6 @@ app.post("/users", (req, res) => {
   m.save();
   res.send("Registered");
   
-  const f =  users.model(email, dataschema);
 });
 
 
