@@ -32,7 +32,7 @@ app.post("/mad", (req, res) => {
   const password = req.body.password;
 
   const em = "A" + email;
-  const md = users.model(em, dataschema);
+  const md = users.model("Em", dataschema);
 
   const m = new md({
     title: title,
