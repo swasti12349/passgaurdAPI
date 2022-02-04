@@ -64,19 +64,8 @@ app.get("/users", (req, res) => {
 app.get("/userdata", (req, res) => {
   var email = req.body.email;
   var result = [];
-  mong.connect(url, (err, db)=>{
-   var cursor =  db.collection(email).find();
-   cursor.forEach((doc, err)=>{
-   result.push(doc);
-
-   }, ()=>{
-     db.close();
-    res.render('index', {items: result});
-    
-   })
-   
-});
-
+  
+  
 });
 
 
