@@ -6,14 +6,11 @@ const app = exp();
 
 app.use(body.urlencoded({ extended: true }));
 
-mong.connect("mongodb://localhost:27017/kop", {
-  useNewUrlParser: true,
-});
 
 const users = mong.createConnection(
   "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb"
 );
-
+url = "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb";
 
 const schema = {
   name: String,
@@ -29,20 +26,22 @@ const dataschema = {
 const mdel = users.model("User", schema);
 
 // upload a users data
+
 app.post("/mad", (req, res) => {
   
-  const title = req.body.title;
-  const email = req.body.email;
-  const password = req.body.password;
-  const em = "A" + email;
+  email = req.body.email;
   
-  const m = new md({
-    title: title,
-    password: password,
+  const m = {
+    title: req.body.title,
+    password: req.body.password
+  };
+
+  mong.connect(url, (err, db)=>{
+      db.collection(email).insertOne(m, (err, result)=>{
+        db.close();
+      })
   });
 
-  m.save();
-  const md = users.model(em, dataschema);
   res.send("Data is saved");
   
 });
@@ -94,8 +93,8 @@ app.post("/users", (req, res) => {
   });
   m.save();
   res.send("Registered");
-  const e = "A" + email;
-  const f =  users.model(e, dataschema);
+  
+  const f =  users.model(email, dataschema);
 });
 
 
