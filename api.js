@@ -46,7 +46,7 @@ app.post("/mad", (req, res) => {
   res.send("Data is saved");
   
 });
-
+//
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
