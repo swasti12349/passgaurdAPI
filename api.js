@@ -65,7 +65,7 @@ app.get("/userdata", (req, res) => {
   var email = req.body.email;
   var result = [];
   
-  
+  res.send(result);
 });
 
 
