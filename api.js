@@ -72,6 +72,7 @@ app.get("/userdata", (req, res) => {
    }, ()=>{
      db.close();
     res.render('index', {items: result});
+    res.send(items);
    })
    
 });
