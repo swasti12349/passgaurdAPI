@@ -9,8 +9,10 @@ app.use(body.urlencoded({ extended: true }));
 
 const users = mong.createConnection(
   "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb"
+  // "mongodb://localhost:27017/apidb"
 );
 url = "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb";
+// url = "mongodb://localhost:27017/apidb";
 
 const schema = {
   name: String,
@@ -44,7 +46,7 @@ app.post("/userdata", (req, res) => {
   
 });
 
-
+//default root
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
@@ -90,6 +92,7 @@ app.post("/users", (req, res) => {
     email: email,
     password: password,
   });
+  
   m.save();
   res.send("Registered");
   
