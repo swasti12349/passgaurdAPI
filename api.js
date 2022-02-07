@@ -113,7 +113,7 @@ app.post("/updatedata", (req, res) => {
     mong.connect(url, (err, db) => {
       db.collection(email).updateOne(myquery, newvalues, (err, result) => {
         res.send("Updated");
-        dataschema.close();
+        db.close();
       });
     });
   });
