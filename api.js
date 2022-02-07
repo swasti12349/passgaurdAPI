@@ -115,6 +115,7 @@ app.post("/updatedata", (req, res) => {
           doc.title = newtitle;
           doc.password = password;
       }
+      doc.save();
     }, ()=>{
       res.send("Updated");
     });
