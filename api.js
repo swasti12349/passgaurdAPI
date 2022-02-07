@@ -6,12 +6,12 @@ const app = exp();
 
 app.use(body.urlencoded({ extended: true }));
 
-
 const users = mong.createConnection(
   "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb"
   // "mongodb://localhost:27017/apidb"
 );
-url = "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb";
+url =
+  "mongodb+srv://swasti12349:%40Swasti123456@cluster0.ydwaf.mongodb.net/apidb";
 // url = "mongodb://localhost:27017/apidb";
 
 const schema = {
@@ -29,21 +29,19 @@ const mdel = users.model("User", schema);
 
 // upload a users data
 app.post("/userdata", (req, res) => {
-  
   email = req.body.email;
   const m = {
     title: req.body.title,
-    password: req.body.password
+    password: req.body.password,
   };
 
-  mong.connect(url, (err, db)=>{
-      db.collection(email).insertOne(m, (err, result)=>{
-        db.close();
-      })
+  mong.connect(url, (err, db) => {
+    db.collection(email).insertOne(m, (err, result) => {
+      db.close();
+    });
   });
 
   res.send("Data is saved");
-  
 });
 
 //default root
@@ -64,17 +62,20 @@ app.get("/users", (req, res) => {
 
 // get data of a user
 app.post("/usersdata", (req, res) => {
-  var resArr=[];
+  var resArr = [];
 
   email = req.body.email;
-  mong.connect(url, (err, db)=>{
+  mong.connect(url, (err, db) => {
     var cursor = db.collection(email).find();
-    cursor.forEach((doc, err)=>{
-          resArr.push(doc);
-    }, ()=>{
-      res.send(resArr);
-    });
-  })
+    cursor.forEach(
+      (doc, err) => {
+        resArr.push(doc);
+      },
+      () => {
+        res.send(resArr);
+      }
+    );
+  });
 });
 
 // register a user
@@ -82,39 +83,38 @@ app.post("/users", (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
-//
+  //
   const m = new mdel({
     name: name,
     email: email,
     password: password,
   });
-  
+
   m.save();
   res.send("Registered");
-  
 });
-
 
 app.listen(process.env.PORT || 3001, () => {
   console.log("Server started");
 });
 
 app.post("/updatedata", (req, res) => {
-
   email = req.body.email;
   title = req.body.title;
   newtitle = req.body.newtitle;
   password = req.body.password;
 
-
-  mong.connect(url, function(err, db) {
+  mong.connect(url, function (err, db) {
     if (err) throw err;
-    var dbo = db.db("mydb");
+    var dbo = db.db("apidb");
     var myquery = { title: title };
-    var newvalues = { $set: {title: newtitle, password: password } };
-    dbo.collection("customers").updateOne(myquery, newvalues, function(err, res) {
-      if (err) throw err;
-      res.send("Updated");
-      db.close();
-    });
+    var newvalues = { $set: { title: newtitle, password: password } };
+    dbo
+      .collection(email)
+      .updateOne(myquery, newvalues, function (err, res) {
+        if (err) throw err;
+        res.send("Updated");
+        db.close();
+      });
   });
+});
