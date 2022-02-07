@@ -114,8 +114,9 @@ app.post("/updatedata", (req, res) => {
       if(doc.title == title){
           doc.title = newtitle;
           doc.password = password;
+          doc.save();
       }
-      doc.save();
+      
     }, ()=>{
       res.send("Updated");
     });
