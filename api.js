@@ -100,7 +100,6 @@ app.listen(process.env.PORT || 3001, () => {
 });
 
 app.post("/updatedata", (req, res) => {
-  
 
   email = req.body.email;
   title = req.body.title;
@@ -108,17 +107,14 @@ app.post("/updatedata", (req, res) => {
   password = req.body.password;
 
 
-  mong.connect(url, (err, db)=>{
-    var cursor = db.collection(email).find();
-    cursor.forEach((doc, err)=>{
-      if(doc.title == title){
-          doc.title = newtitle;
-          doc.password = password;
-          doc.save();
-      }
-      
-    }, ()=>{
+  mong.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("mydb");
+    var myquery = { title: title };
+    var newvalues = { $set: {title: newtitle, password: password } };
+    dbo.collection("customers").updateOne(myquery, newvalues, function(err, res) {
+      if (err) throw err;
       res.send("Updated");
+      db.close();
     });
-  })
-});
+  });
