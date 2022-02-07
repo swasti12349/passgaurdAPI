@@ -76,8 +76,6 @@ app.post("/usersdata", (req, res) => {
     });
   })
 });
-//
-
 
 // register a user
 app.post("/users", (req, res) => {
@@ -100,4 +98,25 @@ app.post("/users", (req, res) => {
 app.listen(process.env.PORT || 3001, () => {
   console.log("Server started");
 });
-/////////////
+
+app.post("/updatedata", (req, res) => {
+  
+
+  email = req.body.email;
+  title = req.body.title;
+  newtitle = req.body.newtitle;
+  password = req.body.password;
+
+
+  mong.connect(url, (err, db)=>{
+    var cursor = db.collection(email).find();
+    cursor.forEach((doc, err)=>{
+      if(doc.title == title){
+          doc.title = newtitle;
+          doc.password = password;
+      }
+    }, ()=>{
+      res.send("Updated");
+    });
+  })
+});
