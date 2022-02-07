@@ -106,15 +106,15 @@ app.post("/updatedata", (req, res) => {
 
   mong.connect(url, function (err, db) {
     if (err) throw err;
-    var dbo = db.db("apidb");
+    
     var myquery = { title: title };
     var newvalues = { $set: { title: newtitle, password: password } };
-    dbo
-      .collection(email)
-      .updateOne(myquery, newvalues, function (err, res) {
-        if (err) throw err;
+
+    mong.connect(url, (err, db) => {
+      db.collection(email).updateOne(myquery, newvalues, (err, result) => {
         res.send("Updated");
-        db.close();
+        dataschema.close();
       });
+    });
   });
 });
