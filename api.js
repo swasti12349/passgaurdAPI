@@ -63,7 +63,7 @@ app.get("/users", (req, res) => {
 });
 
 // get data of a user
-app.post("/userdata", (req, res) => {
+app.post("/usersdata", (req, res) => {
   var resArr=[];
 
   email = req.body.email;
