@@ -94,10 +94,12 @@ app.post("/users", (req, res) => {
   res.send("Registered");
 });
 
+//listening to port
 app.listen(process.env.PORT || 3001, () => {
   console.log("Server started");
 });
 
+//update user data
 app.post("/updatedata", (req, res) => {
   email = req.body.email;
   title = req.body.title;
@@ -118,3 +120,23 @@ app.post("/updatedata", (req, res) => {
     });
   });
 });
+
+//delete user data
+app.post("/deletedata", (req, res) => {
+  email = req.body.email;
+  title = req.body.title;
+
+  mong.connect(url, function (err, db) {
+    if (err) throw err;
+    
+    var myquery = { title: title };
+
+    mong.connect(url, (err, db) => {
+      db.collection(email).deleteOne(myquery, (err, result) => {
+        res.send("Deleted");
+        db.close();
+      });
+    });
+  });
+});
+
