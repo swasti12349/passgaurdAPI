@@ -27,7 +27,7 @@ const dataschema = {
 
 const mdel = users.model("User", schema);
 
-// upload a users data
+// upload a users data.
 app.post("/userdata", (req, res) => {
   email = req.body.email;
   const m = {
